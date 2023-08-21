@@ -1,0 +1,108 @@
+\documentclass[presentation]{beamer}
+
+\usecolortheme{Imperial}
+ 
+\usepackage[utf8]{inputenc}
+\usepackage[UKenglish]{babel}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{csquotes}
+\usepackage{tikz}
+\usepackage{media9}
+
+% complying UK date format, i.e. 1 January 2001
+\usepackage{datetime}
+\let\dateUKenglish\relax
+\newdateformat{dateUKenglish}{\THEDAY~\monthname[\THEMONTH] \THEYEAR}
+
+% Imperial College Logo, not to be changed!
+\institute{\includegraphics[height=0.7cm]{Imperial_1_Pantone_solid.eps}}
+
+\title{UROP 2023}
+
+\author{Archibald Browne}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{What did I do?}
+    The project focused around formalising exercises from Professor M. Liebeck's 'A Concise Introduction to Mathematics' in Lean. Specifically, those from Chapter 10 'The Integers'.
+    \pause
+    \\ 
+    \vspace{1em}
+    The questions were mainly focused around the following areas:
+    \begin{itemize}
+        \item Greatest Common Divisor
+        \item Lowest Common Multiple
+        \item Bézout's Identity
+        \item Prime Numbers
+    \end{itemize}
+    \pause
+    I will go over some of the highlights/difficulties I experienced over the project, and what I learnt.
+\end{frame}
+
+\begin{frame}{Highlights}
+    Here I will look at a couple of my favourite questions:
+    \pause
+    \begin{block}{Question 8}
+        Let \(n \geq 2\) be an Integer. Prove that \(n\) is prime if and only if \(\forall a \in \mathbb{Z}, \  \gcd(a, n) = 1 \vee n \vert a \)
+    \end{block}
+    \pause
+    \begin{itemize}
+        \item Like many of the questions, this was much harder to teach to Lean than it was to solve. 
+        \item The general idea is that prime numbers cannot have common factors with any numbers that aren't a multiple of that prime.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Highlights}
+    Question Statement in Lean:
+    \\
+    \vspace{1em}
+    \includegraphics[width=\textwidth]{UROP presentation/Question8.png}
+    \pause
+    \\
+    \vspace{1em}
+    Lean is fussy about the distinction between integers and naturals, so even though we have declared \(2 \leq n\) and \(n \in \mathbb{Z}\), we still need to tell Lean that \(n\) is a natural number in order to use theorems about natural numbers.
+    \\
+    \vspace{1em}
+    \pause
+    For the \(\implies\) direction, we condition on whether \( n \vert a\). If it does, we get the result immediately. If not, then \(gcd(a, n) = 1\) because \( n\) is prime.
+\end{frame}
+
+\begin{frame}[fragile]{Highlights}
+    For the \(\impliedby\) direction, we use the theorem:
+    \begin{verbatim}
+    Nat.prime_def_lt'
+    \end{verbatim}
+    Which says:
+    \[n \in \mathbb{N} \text{ is prime} \iff \forall d \in (1, n) \cap \mathbb{N}, d \nmid n\]
+    \pause
+    We then condition over our assumption specialized for some particular \(d\) value:
+    \begin{itemize}
+        \item If \(gcd(d, n) = 1\) then clearly \(d \nmid n\)
+        \item If \(d \vert n\) then we have \(d \geq n \vee d = 1\), a contradiction
+    \end{itemize}
+    
+\end{frame}
+
+
+\begin{frame}{What did I Learn?}
+    Specific
+\end{frame}
+
+\begin{frame}{What did I Learn?}
+    General
+\end{frame}
+
+
+\begin{frame}{Conclusion}
+    
+\end{frame}
+\end{document}
