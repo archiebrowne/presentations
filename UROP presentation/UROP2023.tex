@@ -48,6 +48,8 @@
     I will go over some of the highlights/difficulties I experienced over the project, and what I learnt.
 \end{frame}
 
+% Question 8
+
 \begin{frame}{Highlights}
     Here I will look at a couple of my favourite questions:
     \pause
@@ -87,10 +89,48 @@
     We then condition over our assumption specialized for some particular \(d\) value:
     \begin{itemize}
         \item If \(gcd(d, n) = 1\) then clearly \(d \nmid n\)
-        \item If \(d \vert n\) then we have \(d \geq n \vee d = 1\), a contradiction
+        \item If \(n \vert d\) then we have \(d \geq n \), a contradiction.
     \end{itemize}
     
 \end{frame}
+
+% Question 9
+
+\begin{frame}{Highlights}
+    Another of my favourite questions was question 9:
+    \begin{block}{Question 9}
+        Let \(a, b\) be coprime integers. Prove that for any integer \(n\) there exists integers \(s, t\) with \(s > 0\) such that \(sa + tb = n\).
+    \end{block}
+    \pause
+    The main steps are:
+    \begin{itemize}
+        \item By Bèzout, \( \exists s', t', s'a + t'b = 1\) since \(a, b\) are coprime
+        \pause
+        \item We don't know whether \( s' > 0 \), so we use a trick:
+        \pause
+        \item \((s' + kb)a + (t' - ka)b = 1) \ \forall k \in \mathbb{Z}\)
+        \pause
+        \item Increase \( k \) until \(s' + kb > 0\), multiply through by \(n\) and we get the result
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Highlights}
+    Question statement in lean:
+    \includegraphics[width=\textwidth]{UROP presentation/Question9.png}
+    \pause
+    To help, I used the following helper lemma:
+    \includegraphics[width=\textwidth]{UROP presentation/Question9helper.png}
+    This is the bulk of the question, and says that if we can find \(s, t\) with \(sa + tb = n\), then there is \(s', t'\) with \(s' > 0\) and \(s'a + t'b = n\).
+\end{frame}
+
+\begin{frame}{Highlights}
+    The following two lines impliment the trick described on the earlier slide:
+    \includegraphics[width=\textwidth]{UROP presentation/Question9helperproof.png}
+    \pause
+    The rest of the proof of the helper proves that these are the correct choices of coefficients
+\end{frame}
+
 
 
 \begin{frame}{What did I Learn?}
@@ -99,9 +139,9 @@
     \begin{itemize}
         \item How to use Lean at a basic level
         \pause
-        \item Developed interest in dependent type theory and functional programming
+        \item Developed interest in dependent type theory and functional programming (Curry-Howard Isomorphism etc.)
         \pause
-        \item 
+        \item How to contribute to open source projects
     \end{itemize}
 \end{frame}
 
